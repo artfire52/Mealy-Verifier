@@ -1,0 +1,302 @@
+\appendix
+
+\medskip
+
+As per the CfP rules, these appendices are for the reviewers only.  Would the submission be accepted, they would be removed from the camera ready version.  However, the corresponding content is available in the Mealy Verifier code repository.
+
+% \section{Algorithms and proof}
+% In this appendix, we describe the algorithms used to verify each type of property.
+% If achieving exhaustiveness is not straightforward, a demonstration is provided.
+% \subsection{Notation and vocabulary}
+% We consider a Mealy machine $\mathcal{M}=(I,O,Q,q_0 , \delta,\lambda)$ as defined at the beginning of the article.
+
+
+% We note $\overline{I}$ and $\overline{O}$, respectively the extended input and output alphabets.
+% They are the union of the original alphabet, the wildcard $*$ and letters that are combinations of original letters with the or operator that we write $+$.
+% Hence, $\overline{I}=I \cup \{*\} \cup \{a,\exists n\in\mathbb{N},\exists(i_1,\dots,i_n)\in I^n,a=i_1+i_2+\dots+i_n\}$. It is the same for $\overline{O}$.
+
+% The input letter of the Mealy machine matches a letter from $\overline{I}$ if :
+% \begin{equation*}
+%     \begin{aligned}
+%         I\times \overline{I}&\rightarrow\{True,False\}\\
+%         (i,i')&\mapsto i\hookrightarrow i' =\begin{cases}i'\in I, True \iff i=i'\\
+%             i'=*, True\\
+%         i\neq*\land i\notin I, True \iff \exists n\in\mathbb{N},\\\exists (a_1,\dots,a_n) \in I/ i'=i+a_1+\dots+a_n
+%     \end{cases}
+%     \end{aligned}
+%     \\
+% \end{equation*}
+% Two letters match if they are equal, one is the wildcard or one is in the decomposition of the other. The same stands for $O$ and $\overline{O}$. 
+
+% We note $\mathcal{E}=I\times O$ the set of events from input and output alphabets and $\overline{\mathcal{E}}=\overline{I}\times\overline{O}$ the set of events from extended alphabets.
+% We note $i/o \in \mathcal{E}$ with $i\in I$ and $o\in O $. 
+% Events are expressed with $\overline{\mathcal{E}}$ in properties and with $\mathcal{E}$ in the Mealy machine. 
+
+% Two events match if each of their letters is matching.
+% \begin{equation*}
+%     \begin{aligned}
+%         \mathcal{E}\times \overline{\mathcal{E}}&\rightarrow\{True,False\}\\
+%         (e=i/o,e'=i'/o')&\mapsto e\hookrightarrow e' \iff i\hookrightarrow i'\wedge e\hookrightarrow e' 
+%     \end{aligned}
+%     \\
+% \end{equation*}
+% We can extend:
+% \begin{equation*}
+%     \begin{aligned}
+% \forall n \in \mathbb{N},\forall e,e'=(e'_1,\dots,e'_n)\in\mathcal{E}\times \in\overline{\mathcal{E}}^n,
+% &\\e\hookrightarrow e' \iff \exists k \in [\![1..n]\!],e\hookrightarrow e'_k 
+%     \end{aligned}
+% \end{equation*}
+% The Mealy Verifier computes all simple paths, cycles and sink states. Hence, those pieces of information are available as input for algorithms as well as all states and transitions between them. 
+% We write $\mathcal{C}$ the set of all cycles in the Mealy machine and $\mathcal{P}$ the set of simple paths of the Mealy machine.
+% We note $\mathcal{C}(p)$ for $p\in\mathcal{P}$ all cycles of $\mathcal{M}$ that start on a state present in $p$.
+
+
+% A path $p\in\mathcal{P}$ is simply a list of states and events: $        \underset{0}{S_1} \rightarrow \underset{1}{e_1} \rightarrow \underset{2}{S_2} \rightarrow \underset{3}{e_2} \rightarrow \underset{4}{S_3}\dots$ $S_k$ are the state and $e_k$ the event. 
+
+\section{Properties and Proof}
+We are providing complete or partial proof of algorithms depending on the difficulty of the proof.
+We also gathered proof together to remain brief.
+For all proofs, we consider a Mealy machine $\mathcal{M}=(I,O,Q,q_0 , \delta,\lambda)$. Every algorithm has the Mealy machine and the rule itself as input.\\
+We note that two events match as $e_1\sim e_2$.
+The rules use an extended version of the input and output alphabet as explained in the article.
+We note those set as $\overline{\mathcal{I}}$ and $\overline{\mathcal{O}}$.
+We define $\mathcal{E}$ the set of all possible events using $\overline{\mathcal{I}}$ and $\overline{\mathcal{O}}$.
+
+\subsection{Output Property}
+The algorithm compares the event on every transition to the property and then adds the counterexamples to the output.
+It is presented in algorithm \ref*{alg:output_algo}.
+If an event has $i_r$ as the input letter only $o_k$ are authorized as output letters.
+\begin{algorithm}
+    \caption{Output property algorithm}\label{alg:output_algo}
+    \KwData{$\mathcal{M}=(I,O,Q,q_0 , \delta,\lambda),i_r\in \overline{\mathcal{I}},o_1\dots,o_n\in \overline{\mathcal{O}}$}
+    \KwResult{$\mathcal{O}$}
+    $\mathcal{O}\gets \emptyset$\;
+    \For{$q\in Q $}{
+        \For{$i\in I $}{
+            \If{$i/\lambda(q,i)\nsim i_r/o_k, \forall k\in [\![1,n]\!]$}{
+                $\mathcal{O}\gets \mathcal{O}\cup \{(q,\delta(q,i),i,\lambda(q,i))\} $\;
+            }
+        }
+    }
+\end{algorithm}
+
+The output set  of algorithm \ref*{alg:output_algo} is:
+\begin{equation}
+    \centering
+    \begin{aligned}
+         \mathcal{O}&=\Set{\begin{array}{l}
+            (q,\delta(q,i) ,i ,\lambda(q,i)), \\
+            \forall q \in Q, i\in I \; / \;\forall k \in [\![1,n]\!] i/\lambda(q,i) \nsim i_r/o_k
+          \end{array}}\\
+    \end{aligned}
+    \nonumber
+\end{equation}
+This is the definition of the set composed by every event that does not respect the rule.
+Because every event is written as $i/\lambda(q,i)$ for a state $q\in Q$ and an input letter $i\in I$ by definition of the Mealy machine.
+Thus, our algorithm provides all counterexamples of the property.
+
+
+\subsection{Sink as termination property}
+The structure holding the Mealy machine also holds the sink states.
+It helps to avoid computing the sink states several times. 
+A sink state is formally defined by state $q\in Q$ such that $\forall i\in I, \delta(q,i)=q$. 
+They are identified by iterating over the set of states $Q$ and using the definition.
+The Mealy Verifier identifies them after reading the Mealy machine's file.
+The set of sink states is $\mathcal{S}$.
+\begin{algorithm}
+    \caption{Sink as termination algorithm}\label{alg:sink_desc}
+    \KwData{$S,\mathcal{M}=(I,O,Q,q_0 , \delta,\lambda),e_1\dots,e_n\in \mathcal{E}$}
+    \KwResult{$\mathcal{O}$}
+    $\mathcal{O}\gets \emptyset$\;
+    \For{$q\in \mathcal{S} $}{
+        \For{$i\in I $}{
+            \If{$\forall k\in [\![1,n]\!],i/\lambda(q,i)\nsim e_k $}{
+                $\mathcal{O}\gets \mathcal{O}\cup \{q\} $\;
+                \Break;
+            }
+        }
+    }
+\end{algorithm}
+
+Sink as termination property requires identifying sink states not matching with a given description. 
+This operation is described in algorithm \ref*{alg:sink_desc} with a given description $e_1,\dots,e_n$. 
+$e_1,\dots,e_n$ are the events authorized on the outgoing edges of a sink state.
+Algorithm \ref*{alg:sink_desc} identifies the sink state not respecting the description.
+The reasoning is the same as previously seen for the Output property. 
+Hence, we provide every counterexample for Sink as termination property.
+
+
+\subsection{Sink as target property}
+The property verifies that an event leads to a sink state matching a given description no matter where the event happens. 
+Hence, the property uses a description $e_1,\dots,e_n \in \mathcal{E}$ for the sink states and the event leading to those sink states is written as $e_t$.
+
+\begin{algorithm}
+    \caption{Matching sink state algorithm}\label{alg:sink_desc2}
+    \KwData{$S,\mathcal{M}=(I,O,Q,q_0 , \delta,\lambda),e_1\dots,e_n\in \mathcal{E}$}
+    \KwResult{$\mathcal{S'}$}
+    $\mathcal{S'}\gets \emptyset$\;
+    \For{$q\in \mathcal{S} $}{
+        $is\_matching \gets True$\;
+        \For{$i\in I $}{
+            \If{$ \forall k\in [\![1,n]\!],i/\lambda(q,i)\nsim e_k$}{
+                $is\_matching \gets False$\;
+                \Break\;
+            }
+        }
+        \If{$is\_matching$}{
+            $\mathcal{S'}\gets \mathcal{S'}\cup \{q\} $\;
+        }
+    }
+\end{algorithm}
+Algorithm \ref*{alg:sink_desc2} identifies the sink state matching the description. 
+It is pretty similar to the previous one except that it uses the opposite condition thanks to a boolean.
+Hence, the output $\mathcal{S'}$ is the set of sink states matching the description.
+To provide all counterexamples to the property, we simply apply the algorithm \ref*{alg:output_algo} with the if statement being changed to $i/\lambda(q,i)\sim e_t \wedge \delta(q,i)\notin \mathcal{S'}$.
+
+The reasoning is the same as for Output property. 
+Hence, the Mealy Verifier finds every counterexample to Sink as target property.
+
+
+\subsection{Expected sequence index property}
+This property requires to have an event $e$ and an index $k_t$ to verify that an $k_t$-th transition on the Mealy machine is matching $e$.
+It is verified thanks to algorithm~\ref*{alg:eei}.
+\begin{algorithm}
+    \caption{Expected sequence index algorithm}\label{alg:eei}
+    \KwData{$S,\mathcal{M}=(I,O,Q,q_0 , \delta,\lambda),e\in \mathcal{E},k_t\in \mathbb{N}$}
+    \KwResult{$\mathcal{O}$}
+    $\mathcal{O}\gets \emptyset$\;
+    $\mathcal{S}een\gets \emptyset$\;
+    $\mathcal{N}\gets \{(q_0,0) \} $\;
+    \While{$(q,k)\in \mathcal{N} $}{
+        $\mathcal{N}\gets \mathcal{N}\setminus  \{(q,k)\} $\;
+        $\mathcal{S}een\gets \mathcal{S}\cup \{(q,k) \} $\;
+        \For{$i\in I $}{
+            \eIf{$k==k_t$}{
+                \If{$ i/\lambda(q,i) \nsim e_t \wedge \delta(q,i)\notin \mathcal{S}$}{
+                    $\mathcal{O}\gets \mathcal{O}\cup \{(q,\delta(q,i),i,\lambda(q,i))\} $\;
+                }
+            }{
+                \If{$ (\delta(q,i),k+1) \notin \mathcal{S}een \wedge \delta(q,i)\notin \mathcal{S}$}{
+                    $\mathcal{N}\gets \mathcal{N}\cup \{(\delta(q,i),k+1)\} $\;
+                }
+               
+            }
+        }
+    }
+\end{algorithm}
+
+It is simply an exploration algorithm. 
+We can notice that there is no couple in $\mathcal{N}$ such that the index the greater than $k_t$.
+Because indexes are incremented only when $k\neq k_t$ and the first one is zero.
+Hence, they cannot be greater than $k_t$. 
+Thus, $\mathcal{S}een$ and $\mathcal{N}$ are bounded because $Q$ is finite.
+Finally, the algorithm terminates.
+
+Integers in $\mathcal{N}$ are incremented during the Mealy machine exploration.
+Consequently, they represent when the state is reached. 
+The property aims to verify if a certain event is not matched at a precise moment. 
+Hence, the algorithm finds counterexamples of the property.
+Moreover, even if order does not matter, if $\mathcal{N}$ is a stack, we recognize the DFS algorithm.
+Finally, algorithm \ref*{alg:eei} explores every state with an index less than the property's one. 
+The algorithm finds every counterexample.
+
+
+\subsection{Expected sequence and restricted event properties}
+For those two kind of properties, the proofs are the same as the previous one.
+The only difference is the definition and evolution of the set $\mathcal{S}een$ and $\mathcal{N}$.
+
+For restricted event property, the sets use a state rather than an integer.
+This state indicates whether or not the restriction applies. 
+it evolves thanks to the event on transitions.
+The reasoning is very similar to prove that the algorithm finds every counterexample to the property.
+
+For the expected sequence property, sets are also using an integer. 
+However, it indicates which element of the sequence is expected.
+It starts at zero and increases only if the first element of the sequence is seen.
+If the index $k$ is not zero and the event does not match the $k$-th element of the sequence, the transition is a counterexample.
+The exceptions are the transition leading to the sink states or additional events given in the property.
+The reasoning is very similar and the algorithm finds every counterexample.
+
+
+
+\subsection{Conditional Event Property}
+For this property, we execute the algorithm on every state that has an outgoing edge matching the action event.
+We call those states action states.
+An output graph is provided by the algorithm for each action state.
+We prove the two following properties for output graphs:
+\begin{itemize}
+    \item Any path from a state without incoming transitions to the action state is a counterexample
+    \item All counterexamples of the property are in the output graph. 
+\end{itemize}
+Before starting the proofs, we must explain the prerequisites.
+The order of prerequisites is important so we will consider them as ordered in a table.
+Importantly, prerequisites are indexed by an integer starting from 1.
+Additionally, we introduce the counter-event.
+It is an event that can cancel a premise.  
+
+Then, we need to know what is a counterexample to a conditional event property.
+There are two cases:
+\begin{itemize}
+    \item The premises are not fulfilled among a path.
+    \item An event has canceled a premise and makes the sequence of messages a counterexample.
+\end{itemize}
+One counterexample can correspond to both above descriptions.
+It means that the presence of the counter-event in the path is not required to make it a counterexample.
+However, we consider it as false due to the counter-event.
+
+We explain the algorithm that finds counterexamples for given action state.
+Our algorithm uses a modified DFS algorithm to explore the Mealy machine.
+However, we start from the action state and we use the transposed transitions (the reverse direction).
+We explore the Mealy machine backward from the action state.
+Hence, we are going from the action state to the initial state.
+The algorithm is quite similar to algorithm \ref*{alg:eei}.
+Except that set $\mathcal{N}$ and $\mathcal{S}een$ are stacks containing tuples of $Q\times\mathbb{N}\times\{True,False\}$.
+The integer indicates which premise is expected and the boolean indicates if a counter-event has been seen.
+The integer and the boolean are called attributes. 
+If the integer has a value $i$, it will change to $i-1$ only if the event reached is the event of the $i$-th prerequisite.
+This integer is initially set to the number of prerequisites.
+Consequently, if the initial state is explored with an integer value different than zero, we know that we have found a counterexample.
+
+The boolean is set to true only if we see a counter-event with an index (index of counter-events are the same as prerequisites) lower than the integer.
+We remind you that a prerequisite can be said to be verified only if prerequisites are already verified. 
+Hence, a counter-event cancels every prerequisite having an index equal to or greater than the index of the counter-event.
+This boolean indicates that the counter-event makes the path violate the property.
+If we are expecting the $i$-th prerequisites to be verified, then every counter-event with an index equal to or lower than $i$ is sufficient to make the path wrong.
+The reason is that the $i$-th prerequisites will be set to false after being reached.
+Thus, this prerequisite can not be fulfilled because we explore the Mealy machine backward.
+If the same counter-event is reached after the last prerequisites have been seen, it is not effective because, in the normal order, the counter-event happens before the prerequisite.
+Hence, every counter-event able to make a path wrong is detected.
+The algorithm finds every counterexample due to a counter-event.
+If the boolean is set to $False$ and the exploration cannot continue (initial state is reached), the integer being different than zero indicates that the path is a counterexample.
+Finally, we can detect every kind of counterexample in a path. 
+
+When a counterexample is found, it is added to the output.
+If during exploration we reach a seen state (same attributes and same state), we add the current explored path if an effective counter-event is inside or if the state is already in the output. 
+In both cases, we are sure to add a counterexample because the counter-event is sufficient to create a counterexample and reaching to state being part of the counterexample could not lead to a good path (thanks to attributes). 
+The algorithm is applied twice to avoid the issue where we reach a state and its attributes before it has been added to the output.
+It happens because we cannot control the order of exploration.
+Furthermore, we do not continue on a path when a state has attributes set to zero and false.
+No counterexample could exist no matter what happens after the backward exploration.
+Finally, each output of each action state contains every counterexample without containing a false positive. 
+
+
+
+
+
+
+Then, we focus on the proof that every path on the output is a counterexample, now that we know we provide exhaustivity.
+A state in output is the triplet of the state name in the original Mealy machine and its attribute values.
+In this output, the label does not display as so to avoid confusion.
+We define a path as a path in the output graph starting from a state with no ongoing transition (except cycle) and ending in the action state with attributes set to the number of prerequisites and false.
+In a path of our output, attributes can only evolve with an integer value being incremented compare to the previous one and the boolean changing from $True$ to $False$. 
+Because, among a path, the integer can only decrease by one in our algorithm and the boolean values only change from $False$ to $True$ in our algorithm that explores the Mealy machine backward.
+Thus, it is impossible to dodge an effective counter-event.
+Because a path that has been added to the output due to an effective counter-event starts with a boolean attribute set to true and the action state (end of every path of our output) has a boolean attribute set to false. 
+Moreover, index attributes ensure a path starting from a state with an integer attribute different from zero does not encounter all prerequisites in a way the property is respected. 
+We can remark that a path starting with attributes 0 and false can not exist in the output because it is not a counterexample.
+Finally, every path is a counterexample.
+
+
+
+

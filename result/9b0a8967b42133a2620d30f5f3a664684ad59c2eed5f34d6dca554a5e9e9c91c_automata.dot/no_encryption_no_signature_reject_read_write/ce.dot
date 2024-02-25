@@ -1,0 +1,5 @@
+digraph "Automata" { 
+	 "4" [shape=ellipse,style=filled,fillcolor=white,URL="4"];
+	 "4"->"4" [fontsize=5,label="read_req / ReadRepOK,",URL="t67"];
+	 "4"->"4" [fontsize=5,label="write_req / WriteRepOK,",URL="t68"];
+}

@@ -1,0 +1,35 @@
+digraph "Automata" { 
+	 "6" [shape=ellipse,style=filled,fillcolor=white,URL="6"];
+	 "0" [shape=doubleoctagon,style=filled,fillcolor=white,URL="0"];
+	 "4" [shape=ellipse,style=filled,fillcolor=white,URL="4"];
+	 "5" [shape=ellipse,style=filled,fillcolor=white,URL="5"];
+	 "1" [shape=ellipse,style=filled,fillcolor=white,URL="1"];
+	 "4"->"6" [fontsize=5,label="create_session / CreSesResOK,",URL="t61"];
+	 "4"->"4" [fontsize=5,label="open_secure_channel_request_wrong / OpnRepOK,",URL="t58"];
+	 "4"->"4" [fontsize=5,label="get_endpoint_request / GepResOK,",URL="t59"];
+	 "4"->"4" [fontsize=5,label="active_session / Service_fault,",URL="t63"];
+	 "4"->"4" [fontsize=5,label="active_session_cert / Service_fault,",URL="t64"];
+	 "4"->"4" [fontsize=5,label="active_session_wrong_user / Service_fault,",URL="t65"];
+	 "4"->"4" [fontsize=5,label="active_session_cert_wrong / Service_fault,",URL="t66"];
+	 "4"->"4" [fontsize=5,label="active_session_anon / Service_fault,",URL="t69"];
+	 "1"->"1" [fontsize=5,label="get_endpoint_request / GepResOK,",URL="t17"];
+	 "1"->"1" [fontsize=5,label="active_session / Service_fault,",URL="t21"];
+	 "1"->"1" [fontsize=5,label="active_session_cert / Service_fault,",URL="t22"];
+	 "1"->"1" [fontsize=5,label="active_session_wrong_user / Service_fault,",URL="t23"];
+	 "1"->"1" [fontsize=5,label="active_session_cert_wrong / Service_fault,",URL="t24"];
+	 "1"->"1" [fontsize=5,label="active_session_anon / Service_fault,",URL="t27"];
+	 "1"->"5" [fontsize=5,label="create_session / CreSesResOK,",URL="t19"];
+	 "0"->"4" [fontsize=5,label="open_secure_channel_request_wrong / OpnRepOK,",URL="t2"];
+	 "0"->"0" [fontsize=5,label="hello / Ack,",URL="t0"];
+	 "0"->"0" [fontsize=5,label="get_endpoint_request / No resp,",URL="t3"];
+	 "0"->"0" [fontsize=5,label="close_secure_channel_request / No resp,",URL="t4"];
+	 "0"->"0" [fontsize=5,label="create_session / No resp,",URL="t5"];
+	 "0"->"0" [fontsize=5,label="close_session / No resp,",URL="t6"];
+	 "0"->"0" [fontsize=5,label="active_session / No resp,",URL="t7"];
+	 "0"->"0" [fontsize=5,label="active_session_cert / No resp,",URL="t8"];
+	 "0"->"0" [fontsize=5,label="active_session_wrong_user / No resp,",URL="t9"];
+	 "0"->"0" [fontsize=5,label="active_session_cert_wrong / No resp,",URL="t10"];
+	 "0"->"0" [fontsize=5,label="read_req / No resp,",URL="t11"];
+	 "0"->"0" [fontsize=5,label="write_req / No resp,",URL="t12"];
+	 "0"->"0" [fontsize=5,label="active_session_anon / No resp,",URL="t13"];
+}

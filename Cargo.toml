@@ -1,0 +1,14 @@
+[package]
+name = "mealy_verifier"
+version = "0.9.0"
+edition = "2021"
+authors = ["Arthur"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.1.1", features = ["derive","cargo"] }
+regex = "1.7.1"
+indexmap = "1.9.2"
+rand="*"
+wildmatch = "2.1.1"

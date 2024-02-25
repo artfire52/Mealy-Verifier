@@ -1,0 +1,88 @@
+ETI:Hello_first
+    hello/Ack,
+    0
+:ETI
+
+ETI:channel_mandatory_second
+    open_secure_channel_request/OpnRepOK,
+    1
+:ETI
+
+ETS:hello_secure_channel_sequence
+        hello/Ack,
+        open_secure_channel_request/OpnRepOK,
+:ETS
+
+
+CT:session_over_channel
+    open_secure_channel_request/OpnRepOK,|close_secure_channel_request/*Clo,*
+    create_session/CreSesResOK,
+:CT
+
+CT:activation_after_creation
+    create_session/*CreSesResOK,*|close_session/*CloSesResOK,*
+    active_session_cert+active_session/*AcSesResOK,*
+:CT
+
+
+CT:restricted_address_space_access
+    active_session+active_session_cert/AcSesResOK,|close_session/*CloSesResOK,*
+    read_req+write_req/*ReadRepOK,*+*WriteRepOK,*
+:CT
+
+OR:nullsize_reject
+    I:nullsize
+    O:Eof*
+    O:Err,*
+    O:Service_fault,*
+    O:No resp,
+:OR
+OR:active_session_cert_reject
+    I:active_session_cert_wrong
+    O:Eof,*
+    O:AcSesResNOK,
+    O:Err,*
+    O:Service_fault,*
+    O:No resp,
+:OR
+OR:active_session_reject
+    I:active_session_wrong_user
+    O:AcSesResNOK,
+    O:*Err,*
+    O:*Eof,*
+    O:Service_fault,*
+    O:No resp,
+:OR
+OR:reject_anonymous_session
+    I:active_session_anon
+    O:AcSesResNOK,
+    O:Eof,*
+    O:Err,*
+    O:Service_fault,*
+    O:No resp,
+:OR
+
+
+
+SD:sink
+    */Eof,
+:SD
+
+OR:no_encryption_no_signature_reject_read_write
+    I:read_req+write_req
+    O:Eof,
+    O:*NOK,
+    O:Err,
+    O:Eof,Err,
+    O:Err,Eof,
+    O:Service_fault,*
+    O:No resp,
+:OR
+
+
+
+
+
+
+
+

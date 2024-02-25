@@ -1,0 +1,4 @@
+digraph "Automata" { 
+	 "3" [shape=ellipse,style=filled,fillcolor=white,URL="3"];
+	 "3"->"3" [fontsize=5,label="hello / Ack,",URL="t45"];
+}

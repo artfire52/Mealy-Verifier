@@ -1,0 +1,21 @@
+digraph "Automata" { 
+	 "s8" [label="s8"];
+	 "s23" [label="s23"];
+	 "s19" [label="s19"];
+	 "s26" [label="s26"];
+	 "s0" [label="s0"];
+	 "s14" [label="s14"];
+	 "s3" [label="s3"];
+	 "s21" [label="s21"];
+	 "s15" [label="s15"];
+	 "s25" [label="s25"];
+	 "s14"->"s14" [label="SR_AUTH/NO_RESP"];
+	 "s21"->"s21" [label="SR_AUTH/NO_RESP"];
+	 "s23"->"s23" [label="SR_AUTH/UNIMPL"];
+	 "s15"->"s15" [label="SR_AUTH/UNIMPL"];
+	 "s8"->"s8" [label="SR_AUTH/UNIMPL"];
+	 "s19"->"s19" [label="SR_AUTH/UNIMPL"];
+	 "s0"->"s3" [label="SR_AUTH/KEXINIT"];
+	 "s25"->"s25" [label="SR_AUTH/NO_RESP"];
+	 "s26"->"s26" [label="SR_AUTH/NO_RESP"];
+}

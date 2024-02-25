@@ -1,0 +1,2 @@
+docker: Error response from daemon: network inference_network not found.
+time="2023-01-16T12:00:47+01:00" level=error msg="error waiting for container: context canceled"

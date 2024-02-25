@@ -1,0 +1,11 @@
+Implem: uanet
+Version: 1.4.357.28
+Vocabulary: hello,open_secure_channel_request,open_secure_channel_request_wrong,get_endpoint_request,close_secure_channel_request,create_session,close_session,active_session,active_session_wrong_user,active_session_cert_wrong,read_req,write_req,nullsize,open_secure_channel_c_chunk,active_session_anon
+NodeId: 10554
+NodeIdType: NodeIdNumeric
+Namespace: 2
+Value: 73
+ValueType: int16
+NbContainers: 10
+Timeout: 2000
+Mode: 3

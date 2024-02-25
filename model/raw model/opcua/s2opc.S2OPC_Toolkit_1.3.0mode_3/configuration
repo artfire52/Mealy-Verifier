@@ -1,0 +1,11 @@
+Implem: s2opc
+Version: S2OPC_Toolkit_1.3.0
+Vocabulary: hello,open_secure_channel_request,open_secure_channel_request_wrong,get_endpoint_request,close_secure_channel_request,create_session,close_session,active_session,active_session_wrong_user,active_session_cert_wrong,read_req,write_req,nullsize,open_secure_channel_c_chunk,active_session_anon
+NodeId: Boolean_001
+NodeIdType: NodeIdString
+Namespace: 1
+Value: true
+ValueType: bool
+NbContainers: 10
+Timeout: 800
+Mode: 3

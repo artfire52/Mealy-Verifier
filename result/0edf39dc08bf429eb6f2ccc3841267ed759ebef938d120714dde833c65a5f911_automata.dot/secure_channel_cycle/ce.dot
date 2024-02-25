@@ -1,0 +1,6 @@
+digraph "Automata" { 
+	 "4" [shape=ellipse,style=filled,fillcolor=white,URL="4"];
+	 "1" [shape=ellipse,style=filled,fillcolor=white,URL="1"];
+	 "4"->"4" [fontsize=5,label="open_secure_channel_request / OpnRepOK,",URL="t57"];
+	 "1"->"1" [fontsize=5,label="open_secure_channel_request / OpnRepOK,",URL="t15"];
+}

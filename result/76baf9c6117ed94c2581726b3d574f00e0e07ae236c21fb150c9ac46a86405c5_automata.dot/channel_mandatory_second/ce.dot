@@ -1,0 +1,13 @@
+digraph "Automata" { 
+	 "7" [shape=ellipse,style=filled,fillcolor=white,URL="7"];
+	 "8" [shape=ellipse,style=filled,fillcolor=white,URL="8"];
+	 "4" [shape=ellipse,style=filled,fillcolor=white,URL="4"];
+	 "7"->"7" [fontsize=5,label="get_endpoint_request / GepResOK,",URL="t108"];
+	 "7"->"7" [fontsize=5,label="close_session / CloSesResNOK,",URL="t111"];
+	 "7"->"7" [fontsize=5,label="active_session / AcSesResNOK,",URL="t112"];
+	 "7"->"7" [fontsize=5,label="active_session_wrong_user / AcSesResNOK,",URL="t113"];
+	 "7"->"7" [fontsize=5,label="active_session_cert_wrong / AcSesResNOK,",URL="t114"];
+	 "7"->"7" [fontsize=5,label="active_session_anon / AcSesResNOK,",URL="t119"];
+	 "7"->"4" [fontsize=5,label="hello / Ack,",URL="t105"];
+	 "7"->"8" [fontsize=5,label="create_session / CreSesResOK,",URL="t110"];
+}

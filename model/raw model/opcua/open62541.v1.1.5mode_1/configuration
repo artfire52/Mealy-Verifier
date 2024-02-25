@@ -1,0 +1,11 @@
+Implem: open62541
+Version: v1.1.5
+Vocabulary: hello,open_secure_channel_request,open_secure_channel_request_wrong,get_endpoint_request,close_secure_channel_request,create_session,close_session,active_session,active_session_wrong_user,active_session_cert_wrong,read_req,write_req,nullsize,open_secure_channel_c_chunk,active_session_anon
+NodeId: the.answer
+NodeIdType: NodeIdString
+Namespace: 1
+Value: 43
+ValueType: int32
+NbContainers: 10
+Timeout: 500
+Mode: 1

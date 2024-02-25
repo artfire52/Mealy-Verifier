@@ -1,0 +1,33 @@
+digraph "Automata" { 
+	 "0_1_false" [shape=doubleoctagon,style=filled,fillcolor=white,URL="0",label="0"];
+	 "11_1_false" [shape=ellipse,style=filled,fillcolor=white,URL="11",label="11",color=red];
+	 "12_1_false" [shape=ellipse,style=filled,fillcolor=white,URL="12",label="12"];
+	 "1_1_false" [shape=ellipse,style=filled,fillcolor=white,URL="1",label="1"];
+	 "12_1_false"->"12_1_false" [fontsize=5,label="get_endpoint_request / GepResOK,"];
+	 "12_1_false"->"12_1_false" [fontsize=5,label="close_session / Service_fault,"];
+	 "12_1_false"->"12_1_false" [fontsize=5,label="active_session / Service_fault,"];
+	 "12_1_false"->"12_1_false" [fontsize=5,label="active_session_wrong_user / Service_fault,"];
+	 "12_1_false"->"12_1_false" [fontsize=5,label="active_session_cert_wrong / Service_fault,"];
+	 "12_1_false"->"12_1_false" [fontsize=5,label="read_req / Service_fault,"];
+	 "12_1_false"->"12_1_false" [fontsize=5,label="write_req / Service_fault,"];
+	 "12_1_false"->"12_1_false" [fontsize=5,label="active_session_anon / Service_fault,"];
+	 "12_1_false"->"11_1_false" [fontsize=5,label="create_session / CreSesResOK,"];
+	 "11_1_false"->"12_1_false" [fontsize=5,label="close_session / CloSesResOK,"];
+	 "11_1_false"->"11_1_false" [fontsize=5,label="get_endpoint_request / GepResOK,"];
+	 "11_1_false"->"11_1_false" [fontsize=5,label="active_session / Service_fault,"];
+	 "11_1_false"->"11_1_false" [fontsize=5,label="active_session_wrong_user / Service_fault,"];
+	 "11_1_false"->"11_1_false" [fontsize=5,label="active_session_cert_wrong / Service_fault,"];
+	 "11_1_false"->"11_1_false" [fontsize=5,label="read_req / Service_fault,"];
+	 "11_1_false"->"11_1_false" [fontsize=5,label="write_req / Service_fault,"];
+	 "11_1_false"->"11_1_false" [fontsize=5,label="active_session_anon / Service_fault,"];
+	 "1_1_false"->"1_1_false" [fontsize=5,label="get_endpoint_request / GepResOK,"];
+	 "1_1_false"->"1_1_false" [fontsize=5,label="close_session / Service_fault,"];
+	 "1_1_false"->"1_1_false" [fontsize=5,label="active_session / Service_fault,"];
+	 "1_1_false"->"1_1_false" [fontsize=5,label="active_session_wrong_user / Service_fault,"];
+	 "1_1_false"->"1_1_false" [fontsize=5,label="active_session_cert_wrong / Service_fault,"];
+	 "1_1_false"->"1_1_false" [fontsize=5,label="read_req / Service_fault,"];
+	 "1_1_false"->"1_1_false" [fontsize=5,label="write_req / Service_fault,"];
+	 "1_1_false"->"1_1_false" [fontsize=5,label="active_session_anon / Service_fault,"];
+	 "1_1_false"->"12_1_false" [fontsize=5,label="open_secure_channel_request_wrong / OpnRepOK,"];
+	 "0_1_false"->"1_1_false" [fontsize=5,label="hello / Ack,"];
+	"11_1_false"->"11_1_false"[color=red,label="create_session/CreSesResOK,",fontsize=5];}

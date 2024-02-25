@@ -1,0 +1,20 @@
+digraph "Automata" { 
+	 "s23" [label="s23"];
+	 "s10" [label="s10"];
+	 "s26" [label="s26"];
+	 "s18" [label="s18"];
+	 "s15" [label="s15"];
+	 "s7" [label="s7"];
+	 "s10"->"s10" [label="CH_REQUEST_PTY/CH_NONE"];
+	 "s10"->"s10" [label="CH_DATA/CH_NONE"];
+	 "s10"->"s10" [label="CH_CLOSE/CH_NONE"];
+	 "s10"->"s10" [label="CH_EOF/CH_NONE"];
+	 "s18"->"s18" [label="CH_OPEN/CH_MAX"];
+	 "s23"->"s23" [label="CH_OPEN/CH_MAX"];
+	 "s7"->"s7" [label="CH_REQUEST_PTY/CH_NONE"];
+	 "s7"->"s7" [label="CH_DATA/CH_NONE"];
+	 "s7"->"s7" [label="CH_CLOSE/CH_NONE"];
+	 "s7"->"s7" [label="CH_EOF/CH_NONE"];
+	 "s15"->"s15" [label="CH_OPEN/CH_MAX"];
+	 "s26"->"s26" [label="CH_OPEN/CH_MAX"];
+}

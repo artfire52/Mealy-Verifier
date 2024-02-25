@@ -1,0 +1,11 @@
+Implem: rust
+Version: 0.9
+Vocabulary: hello,open_secure_channel_request,open_secure_channel_request_wrong,get_endpoint_request,close_secure_channel_request,create_session,close_session,active_session,active_session_wrong_user,active_session_cert_wrong,read_req,write_req,nullsize,active_session_anon,open_secure_channel_c_chunk
+NodeId: int32
+NodeIdType: NodeIdString
+Namespace: 2
+Value: 43
+ValueType: int32
+NbContainers: 30
+Timeout: 5000
+Mode: 3

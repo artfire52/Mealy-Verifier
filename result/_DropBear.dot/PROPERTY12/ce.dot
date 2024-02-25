@@ -1,0 +1,12 @@
+digraph "Automata" { 
+	 "s19" [label="s19"];
+	 "s14" [label="s14"];
+	 "s12" [label="s12"];
+	 "s17" [label="s17"];
+	 "s8" [label="s8"];
+	 "s12"->"s8" [label="CH_CLOSE/CH_EOF"];
+	 "s14"->"s8" [label="CH_CLOSE/NO_RESP"];
+	 "s17"->"s8" [label="CH_CLOSE/CH_EOF"];
+	 "s19"->"s8" [label="CH_CLOSE/NO_RESP"];
+	 "s8"->"s8" [label="CH_CLOSE/CH_NONE"];
+}

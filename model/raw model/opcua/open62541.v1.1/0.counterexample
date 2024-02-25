@@ -1,0 +1,7 @@
+Found a counterexample: OutputQuery(I = [Letter('open_secure_channel_request'), Letter('create_session'), Letter('active_session'), Letter('close_session'), Letter('read_req')], O = [Letter('OpnRepOK,'), Letter('CreSesResOK,'), Letter('AcSesResOK,'), Letter('CloSesResOK,'), Letter('Err,Eof,')])
+  time spent so far: 1260.1857497692108
+  n_states: 9
+  n_queries=39686
+  n_submitted_queries=20488
+  n_letters=164800
+  n_submitted_letters=96754

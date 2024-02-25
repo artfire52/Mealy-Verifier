@@ -1,0 +1,11 @@
+Implem: asyncua
+Version: 0.9.0
+Vocabulary: hello,open_secure_channel_request,open_secure_channel_request_wrong,get_endpoint_request,close_secure_channel_request,create_session,close_session,active_session,active_session_cert,active_session_wrong_user,active_session_cert_wrong,read_req,write_req,active_session_anon
+NodeId: 20002
+NodeIdType: NodeIdNumeric
+Namespace: 0
+Value: 43.5
+ValueType: double
+NbContainers: 10
+Timeout: 500
+Mode: 1
